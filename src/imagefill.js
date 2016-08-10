@@ -19,7 +19,14 @@
  * imagesLoaded - https://github.com/desandro/imagesloaded
  *
  */
- ;(function($) {
+ 
+var jQuery = require('jquery');
+var imagesLoaded = require('imagesloaded');
+
+// provide jQuery argument
+imagesLoaded.makeJQueryPlugin(jQuery);
+
+;(function($) {
 
   $.fn.imagefill = function(options) {
 
