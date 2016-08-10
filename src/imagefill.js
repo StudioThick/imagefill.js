@@ -19,7 +19,7 @@
  * imagesLoaded - https://github.com/desandro/imagesloaded
  *
  */
- 
+
 var jQuery = require('jquery');
 var imagesLoaded = require('imagesloaded');
 
@@ -48,10 +48,11 @@ imagesLoaded.makeJQueryPlugin(jQuery);
     $container.css({'overflow':'hidden','position':(containerPos === 'static') ? 'relative' : containerPos});
 
     // set containerH, containerW
-    $container.each(function() {
-      containersH += $(this).outerHeight();
-      containersW += $(this).outerWidth();
-    });
+    for (var i = 0, len = $container.length; i < len; i++) {
+      var $this = $container.eq(i);
+      containersH += $this.outerHeight();
+      containersW += $this.outerWidth();
+    }
 
     // wait for image to load, then fit it inside the container
     $container.imagesLoaded().done(function(img) {
@@ -66,41 +67,46 @@ imagesLoaded.makeJQueryPlugin(jQuery);
     function fitImages() {
       containersH  = 0;
       containersW = 0;
-      $container.each(function() {
-        imageAspect = $(this).find(settings.target).width() / $(this).find(settings.target).height();
-        var containerW = $(this).outerWidth(),
-            containerH = $(this).outerHeight();
-        containersH += $(this).outerHeight();
-        containersW += $(this).outerWidth();
+      for (var i = 0, len = $container.length; i < len; i++) {
+        var $this = $container.eq(i);
+        imageAspect = $this.find(settings.target).width() / $this.find(settings.target).height();
+        var outwrWidth = $this.outerWidth(),
+            outerHeight = $this.outerHeight(),
+            containerW = outwrWidth,
+            containerH = outerHeight,
+            containerAspect = containerW / containerH;
 
-        var containerAspect = containerW/containerH;
+        containersH += outerHeight;
+        containersW += outerHeight;
+
         if (containerAspect < imageAspect) {
           // taller
-          $(this).find(settings.target).css({
+          $this.find(settings.target).css({
               width: 'auto',
               height: containerH,
-              top:0,
-              left:-(containerH*imageAspect-containerW)/2
+              top: 0,
+              left: -(containerH * imageAspect - containerW) / 2
             });
         } else {
           // wider
-          $(this).find(settings.target).css({
+          $this.find(settings.target).css({
               width: containerW,
               height: 'auto',
-              top:-(containerW/imageAspect-containerH)/2,
-              left:0
+              top:-(containerW / imageAspect - containerH) / 2,
+              left: 0
             });
         }
-      });
+      };
     }
 
     function checkSizeChange() {
       var checkW = 0,
           checkH = 0;
-      $container.each(function() {
-        checkH += $(this).outerHeight();
-        checkW += $(this).outerWidth();
-      });
+      for (var i = 0, len = $container.length; i < len; i++) {
+        var $this = $container.eq(i);
+        checkH += $this.outerHeight();
+        checkW += $this.outerWidth();
+      };
       if (containersH !== checkH || containersW !== checkW) {
         fitImages();
       }
