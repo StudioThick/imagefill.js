@@ -1,8 +1,8 @@
 {
   "name": "imagefill",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The jQuery plugin for making images fill their containers",
-  "main": "index.js",
+  "main": "src/imagefill.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/oresh/imagefill.js.git"
@@ -12,13 +12,18 @@
     "imageloaded",
     "responsive image"
   ],
-  "author": "johnpolacek",
+  "author": {
+    "name": "johnpolacek"
+  },
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/oresh/imagefill.js/issues"
   },
   "dependencies": {
-    "jquery": "~3.1.0",
-    "imagesloaded": "~4.1.0"
+    "imagesloaded": "~4.1.0",
+    "jquery": ">=1.9.1"
+  },
+   "devDependencies": {
+    "jquery": "~3.1.0"
   }
 }
