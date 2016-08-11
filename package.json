@@ -1,5 +1,5 @@
 {
-  "name": "imagefill.js",
+  "name": "imagefill",
   "version": "0.0.1",
   "description": "The jQuery plugin for making images fill their containers",
   "main": "index.js",
