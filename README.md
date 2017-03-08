@@ -1,5 +1,5 @@
 # imagefill.js
-## The jQuery plugin for making an image fill its container (and be centered)
+## The javascript plugin for making an image fill its container (and be centered)
 by [John Polacek](http://johnpolacek.com)
 
 See demo and documentation at the [project page](http://johnpolacek.github.io/imagefill.js)
