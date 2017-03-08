@@ -1,11 +1,11 @@
 {
-  "name": "imagefillplain.js",
+  "name": "imagefill.js",
   "version": "0.0.1",
   "description": "The javascript plugin for making images fill their containers",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/StudioThick/imagefill.js"
+    "url": "git://github.com/oresh/imagefill.js"
   },
   "keywords": [
     "imagefill",
@@ -15,7 +15,7 @@
   "author": "johnpolacek",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/StudioThick/imagefill.js/issues"
+    "url": "https://github.com/oresh/imagefill.js/issues"
   },
   "dependencies": {
     "imagesloaded": "~4.1.0"
