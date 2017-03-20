@@ -46,7 +46,7 @@ function imagefill(container, options) {
         defaults = {
           runOnce: false,
           target: 'img',
-          throttle : 32  // 30fps
+          throttle : 16  // 60fps
         },
         settings = extend({}, defaults, options);
 
@@ -73,6 +73,7 @@ function imagefill(container, options) {
       fitImages($container);
       if (!settings.runOnce) {
         checkSizeChange();
+        window.addEventListener('resize', window.debounce(checkSizeChange, settings.throttle)); 
       }
     });
   }
@@ -81,18 +82,17 @@ function imagefill(container, options) {
     containersH  = 0;
     containersW = 0;
 
-    var $this = $container;
-    imageAspect = $this.querySelectorAll(settings.target).width / $this.querySelectorAll(settings.target).height;
-
-    var outerWidth = $this.offsetWidth,
-        outerHeight = $this.offsetHeight,
+    var $target = $container.querySelector(settings.target),
+        outerWidth = $container.offsetWidth,
+        outerHeight = $container.offsetHeight,
         containerW = outerWidth,
         containerH = outerHeight,
-        containerAspect = containerW / containerH,
-        $target = $this.querySelector(settings.target);
+        containerAspect = containerW / containerH;
+    
+    imageAspect = $target.offsetWidth / $target.offsetHeight;
 
     containersH += outerHeight;
-    containersW += outerHeight;
+    containersW += outerWidth;
 
     if (containerAspect < imageAspect) {
       // taller
@@ -110,17 +110,12 @@ function imagefill(container, options) {
   }
 
   function checkSizeChange() {
-    var checkW = 0,
-        checkH = 0;
-    for (var i = 0, len = $container.length; i < len; i++) {
-      var $this = $container.eq(i);
-      checkH += $this.offsetHeight;
-      checkW += $this.offsetWidth;
-    };
+    var checkW = $container.offsetWidth,
+        checkH = $container.offsetHeight;
+
     if (containersH !== checkH || containersW !== checkW) {
       fitImages();
     }
-    setTimeout(checkSizeChange, settings.throttle);
   }
 
   return this;
